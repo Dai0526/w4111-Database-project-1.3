@@ -173,7 +173,7 @@ def index():
   #return render_template("index.html", **context)
   return render_template("index.html", **context)
 
-  #return render_template("index.html", **region)
+
 
 #
 # This is an example of a different path.  You can see it at:
@@ -191,9 +191,10 @@ def another():
 # Example of adding new data to the database
 @app.route('/add', methods=['POST'])
 def add():
-  name = request.form['name']
-  g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
-  return redirect('/')
+  return render_template("add.html")
+ # name = request.form['name']
+ # g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
+ # return redirect('/')
 
 
 @app.route('/login')
