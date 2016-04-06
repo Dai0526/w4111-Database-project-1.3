@@ -195,7 +195,9 @@ def add():
  # name = request.form['name']
  # g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
  # return redirect('/')
-
+@app.route('/find', methods=['POST'])
+def find():
+  return render_template("find.html")
 
 @app.route('/login')
 def login():
