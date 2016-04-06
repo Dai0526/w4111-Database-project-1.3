@@ -95,6 +95,7 @@ def teardown_request(exception):
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
 @app.route('/')
+#when it came to / it means load the page
 def index():
   """
   request is a special object that Flask provides to access web request information:
@@ -113,11 +114,26 @@ def index():
   #
   # example of a database query
   #
-  cursor = g.conn.execute("SELECT name FROM product")
+  cur=g.conn
+  cursor = cur.execute("SELECT name FROM product")
   names = []
   for result in cursor:
     names.append(result['name'])  # can also be accessed using result[0]
+ 
+
   cursor.close()
+
+  cur=g.conn
+  cursor2 = cur.execute("SELECT sregion FROM storage")
+  regions = []
+  for re in cursor2:
+    regions.append(re['sregion'])
+  cursor2.close()
+
+  #cursor = cur.execute("SELECT region FROM storage ");
+  #for result2 in cursor2:
+  #  region.append(result['region'])
+
 
   #
   # Flask uses Jinja templates, which is an extension to HTML where you can
@@ -145,14 +161,19 @@ def index():
   #     <div>{{n}}</div>
   #     {% endfor %}
   #
-  context = dict(data = names)
+  context = dict(data = names,r=regions)
+
+  #context2= dict(r = regions)
 
 
   #
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
   #
+  #return render_template("index.html", **context)
   return render_template("index.html", **context)
+
+  #return render_template("index.html", **region)
 
 #
 # This is an example of a different path.  You can see it at:

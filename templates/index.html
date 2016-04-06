@@ -8,12 +8,18 @@
 
 
 <body>
-  <h1>Some famous Computer Scientists</h1>
+  <h1>All items in List</h1>
   <div>{{data}}</div>
 
   <div>
     {% for n in data %}
     <div>{{n}}</div>
+    {% endfor %}
+  </div>
+  <h2> Region of storage</h2>
+    <div>
+    {% for m in r %}
+    <div>{{m}}</div>
     {% endfor %}
   </div>
 
