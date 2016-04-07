@@ -1,14 +1,7 @@
 <html>
 
 <head>
-  <title>W4111 p1.3</title>
-  <h1>W4111 Database project 1 part3</h1>
-  <p title="W4111 Database project 1 part3">
-      Name: Tianhua Fang-tf2377<br>
-            Edwin   Chan-cc3919
-  </p>
-
-  <style>
+<style>
     body{ 
       font-size: 14pt;
       font-family: arial;
@@ -17,6 +10,12 @@
       overflow-y:scroll; 
       min-width: 1000px; 
     }
+
+    h1{text-align: center;}
+    h3{text-align: center;}
+    h4{text-align: center;}
+    p{text-align: center;}
+        div{text-align: center;}
     .caption{
             position: fixed;
             max-width: 200px;
@@ -31,6 +30,19 @@
             z-index:2;
             background-color:rgba(30,144,255,0.5);}
   </style>
+
+  <title>W4111 p1.3</title>
+  <h1>COMS W4111 Database project 1 part3</h1>
+  <p title="W4111 Database project 1 part3">
+      Name: Tianhua Fang-tf2377,  Edwin Chan-cc3919    
+      <hr>
+  </p>
+  
+  <p><a href="add.html">INSERT DATA INTO DATABASE</a>  
+      <a> | </a>
+     <a href="find.html">LOOK UP THE DATABASE</a></p>
+  <hr>
+  
 </head>
 
 <body>
@@ -39,9 +51,8 @@
  </div>
 
 
-  <h3>All items in List</h3>
-  <div>{{data}}</div>
 
+  <h3>All items in List</h3>
   <div>
     {% for n in data %}
     <div>{{n}}</div>
@@ -50,13 +61,13 @@
 
 
   <h4> Region of storage</h4>
-    <div>
+  <div>
     {% for m in r %}
     <div>{{m}}</div>
     {% endfor %}
   </div>
 
-<p><a href="another.html">Go to the other page</a></p>
+
 
 <form method="POST" action="/add">
 <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>

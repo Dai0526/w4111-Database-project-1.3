@@ -94,6 +94,7 @@ def teardown_request(exception):
 # see for routing: http://flask.pocoo.org/docs/0.10/quickstart/#routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
+@app.route('/index.html')
 @app.route('/')
 #when it came to / it means load the page
 def index():
@@ -183,26 +184,34 @@ def index():
 # Notice that the function name is another() rather than index()
 # The functions for each app.route need to have different names
 #
-@app.route('/another')
-def another():
-  return render_template("another.html")
+
+
+@app.route('/add.html')
+def add():
+  return render_template('add.html')
+
+@app.route('/find.html')
+def find():
+  return render_template('find.html')
+
+#@app.route('/index.html')
+#def home():
+# return render_template('index.html')
 
 
 # Example of adding new data to the database
-@app.route('/add', methods=['POST'])
-def add():
-  return render_template("add.html")
- # name = request.form['name']
+#@app.route('/add', methods=['POST'])
+#def add():
+#  return render_template("add.html")
+
+# name = request.form['name']
  # g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
  # return redirect('/')
-@app.route('/find', methods=['POST'])
-def find():
-  return render_template("find.html")
 
-@app.route('/login')
-def login():
-    abort(401)
-    this_is_never_executed()
+#@app.route('/login')
+#def login():
+#    abort(401)
+#    this_is_never_executed()
 
 
 if __name__ == "__main__":

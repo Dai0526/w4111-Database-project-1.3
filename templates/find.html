@@ -1,24 +1,77 @@
 <html> 
-
-<title>FIND</title>
-<h1>
-   Database Find page
-</h1>
-
-  <style>
+<head>
+<style>
     body{ 
       font-size: 12pt;
       font-family: arial;
+      position:relative;
+      top: 20px;
+      overflow-y:scroll; 
+      min-width: 1000px; 
     }
-    </style>
 
+    h1{text-align: center;}
+    h3{text-align: center;}
+    h4{text-align: center;}
+    p{text-align: center;}
+        div{text-align: center;}
+    .caption{
+            position: fixed;
+            max-width: 200px;
+            font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+            font-weight: lighter;
+            font-style: italic;
+            text-align: center;
+            text-decoration: none;
+            font-size: 80%;
+            right:5px;
+            bottom:25px;
+            z-index:2;
+            background-color:rgba(30,144,255,0.5);}
+  </style>
 
-    <head>you can look up the database here</head>
+  <title>FIND</title>
+  <h1>
+     Database LOOK UP PAGE:<br>
+     This page will be the insert function page for database
+     <hr>
+  </h1>
+  
+  <p><a href="index.html">Main Page</a>  
+      <a> | </a>
+     <a href="add.html">INSERT DATA INTO DATABASE</a></p>
+  <hr>
+  
+</head>
+
+<body>
+   <div class="caption">
+        <p >Some text here for the instruction about how to look up the database</p>
+   </div>
+
 
     <div>
-    	<input type="text" id="pname"> 
-        <button id="ins">
-  			FIND
+      <input type="text" id="pname"> 
+        <button id="inspname">
+        FIND product
         </button>
     </div>
+    <div>
+      <input type="text" id="sregion"> 
+        <button id="insregion">
+        FIND STORAGE REGION
+        </button>
+    </div>
+        <div>
+      <input type="text" id="cocompany"> 
+        <button id="inscname">
+        FIND COOP_COMPANY 
+        </button>
+    </div>
+    <hr>
+    <p>
+      Here should have a text aera to show result
+    </p>
+
+</body>
 </html>
