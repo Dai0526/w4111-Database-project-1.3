@@ -194,6 +194,10 @@ def add():
 def find():
   return render_template('find.html')
 
+@app.route('/shallowAmazon.html')
+def client():
+  return render_template('shallowAmazon.html')
+
 #@app.route('/index.html')
 #def home():
 # return render_template('index.html')
