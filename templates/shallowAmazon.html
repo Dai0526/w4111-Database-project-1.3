@@ -32,10 +32,12 @@
 <body>
 
     <div>
-      <input type="text" id="pname"> 
-        <button id="inspname">SEARCH</button>
+      
 
-      <form>
+      <form action="/shallowAmazon.html" method="POST">
+      <input type="text" id="pname"> 
+        <input type="submit" value="SEARCH">
+        <br>
         Sort by:
         <input type="radio" name="sort" value="psort"/> Price
         <input type="radio" name="sort" value="asort"/>Amount
@@ -48,6 +50,14 @@
     <p>
       Here should have a text aera to show result
     </p>
+  <h3>All items in List</h3>
+
+  <div>
+    {% for n in searchOutput %}
+    <div>{{n}}</div>
+    {% endfor %}
+  </div>
+
 
 </body>
 </html>

@@ -131,11 +131,6 @@ def index():
     regions.append(re['sregion'])
   cursor2.close()
 
-  #cursor = cur.execute("SELECT region FROM storage ");
-  #for result2 in cursor2:
-  #  region.append(result['region'])
-
-
   #
   # Flask uses Jinja templates, which is an extension to HTML where you can
   # pass data to a template and dynamically generate HTML based on the data
@@ -164,9 +159,6 @@ def index():
   #
   context = dict(data = names,r=regions)
 
-  #context2= dict(r = regions)
-
-
   #
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
@@ -186,22 +178,27 @@ def index():
 #
 
 
-@app.route('/add.html')
+@app.route('/add.html', methods=['GET', 'POST'])
 def add():
   return render_template('add.html')
 
-@app.route('/find.html')
+@app.route('/find.html', methods=['GET', 'POST'])
 def find():
   return render_template('find.html')
 
-@app.route('/shallowAmazon.html')
+@app.route('/shallowAmazon.html', methods=['GET', 'POST'])
 def client():
-  return render_template('shallowAmazon.html')
+  #option=request.form["sort"]
+  #if option=="dsort":
+  #cur3=g.conn
+  #cursor3 = cur3.execute("SELECT name price amount FROM product")
+  products = ["mouse", "haha"]
+  #for result3 in cursor3:
+  # products.append(result3['name'])  
 
-#@app.route('/index.html')
-#def home():
-# return render_template('index.html')
-
+  #cursor.close()
+  context = dict(searchOutput = products)
+  return render_template('shallowAmazon.html', **context)
 
 # Example of adding new data to the database
 #@app.route('/add', methods=['POST'])
