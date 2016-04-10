@@ -94,7 +94,7 @@ def teardown_request(exception):
 # see for routing: http://flask.pocoo.org/docs/0.10/quickstart/#routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
-@app.route('/index.html')
+@app.route('/index')
 @app.route('/')
 #when it came to / it means load the page
 def index():
@@ -110,8 +110,6 @@ def index():
 
   # DEBUG: this is debugging code to see what request looks like
   print request.args
-
-
   #
   # example of a database query
   #
@@ -178,17 +176,18 @@ def index():
 #
 
 
-@app.route('/add.html', methods=['GET', 'POST'])
+@app.route('/add', methods=['GET', 'POST'])
 def add():
   return render_template('add.html')
 
-@app.route('/find.html', methods=['GET', 'POST'])
+@app.route('/find', methods=['GET', 'POST'])
 def find():
   return render_template('find.html')
 
-@app.route('/shallowAmazon.html', methods=['GET', 'POST'])
+@app.route('/shallowAmazon', methods=['GET', 'POST'])
 def client():
-  #option=request.form["sort"]
+  error=None
+  opt=request.form['sort']
   #if option=="dsort":
   #cur3=g.conn
   #cursor3 = cur3.execute("SELECT name price amount FROM product")
