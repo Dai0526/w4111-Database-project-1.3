@@ -186,8 +186,8 @@ def find():
 
 @app.route('/shallowAmazon', methods=['GET', 'POST'])
 def client():
-  error=None
-  opt=request.form['sort']
+  #error=None
+  #opt=request.form['sort']
   #if option=="dsort":
   #cur3=g.conn
   #cursor3 = cur3.execute("SELECT name price amount FROM product")
