@@ -33,7 +33,7 @@
   <title>FIND</title>
   <h1>
      Database LOOK UP PAGE:<br>
-     This page will be the insert function page for database
+     This page will be the data lookup page for database
      <hr>
   </h1>
   
@@ -50,30 +50,33 @@
    </div>
 
 
+    
     <div>
- 
-      <p>Name of new computer scientist: <input type="text" name="name"> <input type="submit" value="Add"></p>
-      <form method="POST" action="find.html">
-        <input type="text" name="pname"> 
-        <input type="submit" value="FIND PRODUCT">
-      </form>
-    </div>
-    <div>
-      <input type="text" id="sregion"> 
-        <button id="insregion">
-        FIND STORAGE REGION
-        </button>
-    </div>
-        <div>
-      <input type="text" id="cocompany"> 
-        <button id="inscname">
-        FIND COOP_COMPANY 
-        </button>
+      <div>
+      Useful Information
+      <select>
+        <option value="Product">Product</option>
+        <option value="Storage">Storage</option>
+        <option value="CoCompany">CoopCompany</option>
+        <option value="supplier">Supplier</option>
+      </select>
+        <input type="submit" value="Show Query Result">
+      </div>
+      <hr>
+      Implement your own Query:
+      <div>
+      <textarea name="query" rows="12" cols="80"></textarea><br>
+      <input type="submit" value="Submit"></input>
+
+      </textarea>
+      
+
+      </div>
     </div>
     <hr>
-    <p>
+    <i>
       Here should have a text aera to show result
-    </p>
+    </i>
 
 </body>
 </html>

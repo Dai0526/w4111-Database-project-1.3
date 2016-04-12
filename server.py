@@ -15,6 +15,7 @@ Read about it online.
 """
 
 import os
+import requests
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
@@ -46,11 +47,11 @@ engine = create_engine(DATABASEURI)
 # Example of running queries in your database
 # Note that this will probably not work if you already have a table named 'test' in your database, containing meaningful data. This is only an example showing you how to run queries in your database using SQLAlchemy.
 #
-engine.execute("""CREATE TABLE IF NOT EXISTS test (
-  id serial,
-  name text
-);""")
-engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
+#engine.execute("""CREATE TABLE IF NOT EXISTS test (
+#  id serial,
+#  name text
+#);""")
+#engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
 
 
 @app.before_request
@@ -186,8 +187,7 @@ def find():
 
 @app.route('/shallowAmazon', methods=['GET', 'POST'])
 def client():
-  #error=None
-  #opt=request.form['sort']
+  opt=request.form['text']
   #if option=="dsort":
   #cur3=g.conn
   #cursor3 = cur3.execute("SELECT name price amount FROM product")
