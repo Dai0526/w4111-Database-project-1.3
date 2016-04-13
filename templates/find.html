@@ -37,9 +37,8 @@
      <hr>
   </h1>
   
-  <p><a href="index">Main Page</a>  
-      <a> | </a>
-     <a href="add">INSERT DATA INTO DATABASE</a></p>
+  <p>
+
   <hr>
   
 </head>
@@ -54,29 +53,33 @@
     <div>
       <div>
       Useful Information
-      <select>
-        <option value="Product">Product</option>
-        <option value="Storage">Storage</option>
-        <option value="CoCompany">CoopCompany</option>
-        <option value="supplier">Supplier</option>
-      </select>
-        <input type="submit" value="Show Query Result">
+      <form action='find' method="POST">
+        <select>
+          <option label="select" value="SELECT * FROM product">Product</option>
+          <option label="select" value="Storage">Storage</option>
+          <option label="select" value="CoCompany">CoopCompany</option>
+          <option label="select" value="supplier">Supplier</option>
+        </select>
+        <input type="submit" name="findbtn" value="Show Query Result">
+      </form>
       </div>
       <hr>
       Implement your own Query:
-      <div>
-      <textarea name="query" rows="12" cols="80"></textarea><br>
-      <input type="submit" value="Submit"></input>
 
-      </textarea>
-      
+      <form method="POST" action="/find" >
+      <textarea name="findbtn" rows="12" cols="80"></textarea><br>
+      <input type="submit" name="findbtn" value="Submit"></input>
+      </form>
 
-      </div>
     </div>
-    <hr>
-    <i>
-      Here should have a text aera to show result
-    </i>
+ 
+  <hr>
 
+  <div>
+      {% for n in context %}
+           <div>{{n}}</div>
+      {% endfor %}
+  </div>
+<hr>
 </body>
 </html>

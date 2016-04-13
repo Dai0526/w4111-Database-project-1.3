@@ -15,7 +15,6 @@ Read about it online.
 """
 import random
 import os
-import requests
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response
@@ -47,12 +46,6 @@ engine = create_engine(DATABASEURI)
 # Example of running queries in your database
 # Note that this will probably not work if you already have a table named 'test' in your database, containing meaningful data. This is only an example showing you how to run queries in your database using SQLAlchemy.
 #
-#engine.execute("""CREATE TABLE IF NOT EXISTS test (
-#  id serial,
-#  name text
-#);""")
-#engine.execute("""INSERT INTO test(name) VALUES ('grace hopper'), ('alan turing'), ('ada lovelace');""")
-
 
 @app.before_request
 def before_request():
@@ -95,9 +88,7 @@ def teardown_request(exception):
 # see for routing: http://flask.pocoo.org/docs/0.10/quickstart/#routing
 # see for decorators: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 #
-@app.route('/index', methods=['GET', 'POST'])
-@app.route('/', methods=['GET', 'POST'])
-#when it came to / it means load the page
+@app.route('/')
 def index():
   """
   request is a special object that Flask provides to access web request information:
@@ -111,24 +102,17 @@ def index():
 
   # DEBUG: this is debugging code to see what request looks like
   print request.args
+
+
   #
   # example of a database query
   #
-  cur=g.conn
-  cursor = cur.execute("SELECT name FROM product")
+
+  cursor = g.conn.execute("SELECT name FROM test")
   names = []
   for result in cursor:
     names.append(result['name'])  # can also be accessed using result[0]
- 
-
   cursor.close()
-
-  cur=g.conn
-  cursor2 = cur.execute("SELECT sregion FROM storage")
-  regions = []
-  for re in cursor2:
-    regions.append(re['sregion'])
-  cursor2.close()
 
   #
   # Flask uses Jinja templates, which is an extension to HTML where you can
@@ -156,16 +140,14 @@ def index():
   #     <div>{{n}}</div>
   #     {% endfor %}
   #
-  context = dict(data = names,r=regions)
+  context = dict(data = names)
+
 
   #
   # render_template looks in the templates/ folder for files.
   # for example, the below file reads template/index.html
-  #=
-  #return render_template("index.html", **context)
+  #
   return render_template("index.html", **context)
-
-
 
 #
 # This is an example of a different path.  You can see it at:
@@ -175,81 +157,105 @@ def index():
 # Notice that the function name is another() rather than index()
 # The functions for each app.route need to have different names
 #
-
-
-@app.route('/add', methods=['GET', 'POST'])
-def add():
-  temp=request.form['addbtn']
-  return render_template('add.html')
-
-"""
-  prname=request.form['pname']
-  pramount=request.form['pamount']
-  price=request.form['price']
-  pid=random.randomrange(0,1000)
-  g.conn.execute('INSERT INTO product VALUES (?,?,?,?)',pid,price,prname,pramount)
-  return redirect('/add')
-"""
-
-
-@app.route('/find', methods=['GET', 'POST'])
-def find():
-  temp=str(request.form['findbtn'])
-  print temp
-  if len(temp)>=1:
-    print "XXXXXXXXXXXX"
-  return render_template('find.html', **locals)
-
-
-  buf=request.form['query']
-  cursor = g.conn.execute(buf)
-  ans = []
-  for result in cursor:
-    ans.append(result['name'])  #
+@app.route('/findpro', methods=['POST'])
+def findpro():
+  click=request.form['probtn']
+  cursor = g.conn.execute("SELECT name, price, amount FROM product;")
+  pdts = []
+  for result in cursor: 
+    pdts.append(result['name'])  # can also be accessed using result[0]
+    pdts.append(result['price']) 
+    pdts.append(result['amount'])
   cursor.close()
-  context = dict(output=ans)
+
+  return render_template("findpro.html", **locals())
+
+@app.route('/findcoop', methods=['POST'])
+def findcop():
+  click=request.form['coopbtn']
+  cursor = g.conn.execute("SELECT name FROM coopcompany;")
+  copny = []
+  for result in cursor: 
+    copny.append(result['name'])  # can also be accessed using result[0]
+  cursor.close()
+  return render_template("findcoop.html", **locals())
+
+@app.route('/findst', methods=['POST'])
+def findst():
+  click=request.form['stbtn']
+  cursor = g.conn.execute("SELECT sregion FROM storage;")
+  st = []
+  for result in cursor: 
+    st.append(result['sregion'])  # can also be accessed using result[0]
+  cursor.close()
+  return render_template("findst.html", **locals())
+
+
+@app.route('/findcb', methods=['POST'])
+def findcb():
+  click=request.form['cbbtn']
   
+  cursor = g.conn.execute("""SELECT c.cbregion,count(st.amount) AS kind FROM companybranches c, manage m, storage s, store st WHERE c.cid=m.cid AND m.sid=s.sid AND s.sid=st.sid GROUP BY c.cid;""")
+  cb = []
+  for result in cursor: 
+    cb.append(result['cbregion'])  # can also be accessed using result[0]
+    cb.append(str(result['kind']))
+  cursor.close()
+  return render_template("findcb.html", **locals())
 
-  return redirect('/find', **locals)
-
-
-
-@app.route('/shallowAmazon', methods=['GET', 'POST'])
-def client():
-  temp=request.form['clientbtn']
-
-
-
-
-  #opt=request.form['text']
-  #if option=="dsort":
-  #cur3=g.conn
-  #cursor3 = cur3.execute("SELECT name price amount FROM product")
-  products = ["mouse", "haha"]
-  #for result3 in cursor3:
-  # products.append(result3['name'])  
-
+@app.route('/addpro',methods=['POST'])
+def addpro():
+  pname=request.form['proname']
+  price=float(request.form['proprice'])
+  amount=int(request.form['proamount'])
+  pid=random.randrange(0,1000,2)
+  g.conn.execute("INSERT INTO product (pid,price,name,amount)VALUES (%s,%s,%s,%s)",(pid,price,pname,amount))
+  pro = [pid, price, pname, amount]
+  #for result in cursor: 
+  #  cb.append(result['cbregion'])  
+  #  cb.append(str(result['kind']))
   #cursor.close()
-  context = dict(searchOutput = products)
-  return render_template('shallowAmazon.html', **context)
+  return render_template("addpro.html", **locals())
 
-@app.route('/output', methods=['GET','POST'])
-def result():
-  temp=request.form['submit']
+@app.route('/city',methods=['POST'])
+def city():
+  state=request.form['state']
+  
+  cursor=g.conn.execute("""SELECT p.name, st.amount
+                    FROM companybranches c, manage m,  storage s, store st, product p
+                    WHERE c.cid=m.cid AND m.sid = s.sid AND s.sid = st.sid AND st.pid=p.pid AND c.cbregion =(%s)""",state)
+  out=[]
+  for result in cursor: 
+    out.append(result['name'])  
+    out.append(str(result['amount']))
+  cursor.close()
+  return render_template("city.html", **locals())
 
-# Example of adding new data to the database
-#@app.route('/add', methods=['POST'])
-#def add():
-#  return render_template("add.html")
+@app.route('/copoffer',methods=['POST'])
+def co():
+  click=request.form['cobtn']
+  
+  cursor=g.conn.execute("""SELECT t.name,t.sum FROM (SELECT c.name AS name,sum(p.amount) AS sum, c.cpid AS cpid
+            FROM coopcompany c, provide p
+            WHERE c.cpid=p.cpid
+            GROUP BY c.cpid,c.name) AS t
+            GROUP BY t.name,t.sum 
+            HAVING t.sum=(SELECT max(t2.totalamount) FROM (SELECT c2.name AS name2, sum(p2.amount) AS totalamount
+            FROM coopcompany c2, provide p2
+            WHERE c2.cpid=p2.cpid
+            GROUP BY c2.name) AS t2);""")
+  co=[]
+  for result in cursor: 
+    co.append(result['name'])  
+    co.append(str(result['sum']))
+  cursor.close()
+  return render_template("copoffer.html", **locals())
 
-# name = request.form['name']
- # g.conn.execute('INSERT INTO test VALUES (NULL, ?)', name)
- # return redirect('/')
+@app.route('/shallowAmazon',methods=['POST'])
+def client():
+  click=request.form['sabtn']
+  return render_template("shallowAmazon.html", **locals())
 
-#@app.route('/login')
-#def login():
-#    abort(401)
-#    this_is_never_executed()
 
 
 if __name__ == "__main__":

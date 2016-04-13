@@ -37,9 +37,7 @@
      <hr>
   </h1>
   
-  <p><a href="index">Main Page</a>  
-      <a> | </a>
-     <a href="find">LOOK UP THE DATABASE</a></p>
+  <p>
   <hr>
   
 </head>
@@ -49,10 +47,14 @@
         <p >Some text here for the instruction about how to add data</p>
    </div>
     <div>
-        product name: <input type="text" id="pname"> 
-        amount: <input type="text" id="pamount"> 
-        Price:<input type="text" id="price"> 
-        <button id="addproduct">Add Product</button>
+        <form method="GET">
+        product name: <input type="text" name="pname"> 
+        amount: <input type="text" name="pamount"> 
+        Price:<input type="text" name="price">
+        </form>
+        <form method="POST", action='/add'>
+        <input type="submit" value="Add Product" name="addbtn">
+        </form>
     </div>
     <hr>
 
@@ -64,15 +66,8 @@
         <button id="inspname">Add Storage</button>
     </div>
     <hr>
-    <div>
-        Company Branch Region: <input type="text" id="cbreg"> 
-        Branch Pofit: <input type="text" id="cbprofit">
-        <button id="cb">Add Branch</button>        
-    </div>
-    <hr>
-    <p>
-      Here should have a text aera to show the data or the whole table that just changed
-    </p>
+
+
 
 </body>
 </html>

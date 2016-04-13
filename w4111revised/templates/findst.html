@@ -1,9 +1,8 @@
 <html>
-
 <head>
 <style>
     body{ 
-      font-size: 14pt;
+      font-size: 12pt;
       font-family: arial;
       position:relative;
       top: 20px;
@@ -31,36 +30,26 @@
             background-color:rgba(30,144,255,0.5);}
   </style>
 
-  <title>W4111 p1.3</title>
-  <h1>COMS W4111 Database project 1 part3</h1>
-  <p title="W4111 Database project 1 part3">
-      Name: Tianhua Fang-tf2377   
-      <hr>
-  </p>
+  <title>FIND</title>
+  <h1>
+     Database LOOK UP PAGE:<br>
+     This page shows all storage's region
+     <hr>
+  </h1>
+  
+  <p>
+
   <hr>
-</head>
 
 <body>
- <div class="caption">
-        <p >Some text here for the hint of operations</p>
+<div class="caption">
+        <p > </p>
  </div>
 
- <div>
-      <form method="POST" action="/add" >
-      <input type="submit" value="Insert Page" name="addbtn"></input>
-      </form>
-      <br>
-      <form method="POST" action="/find" >
-      <input type="submit" value="DATABASE LOOKUP" name="findbtn"></input>
-      </form>
-      <br>
-      <br>
-      <form method="POST" action="/shallowAmazon" >
-      <input type="submit" value="Client Page" name="clientbtn"></input>
-      </form>
-
- </div>
-  
+<div>
+	{%for n in st %}
+	<div>{{n}}</div>
+	{% endfor %}
 </body>
 
 

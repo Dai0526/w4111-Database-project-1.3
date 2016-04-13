@@ -1,0 +1,104 @@
+<html>
+  <style>
+    body{ 
+      font-size: 14pt;
+      font-family: arial;
+      position:relative;
+      top: 20px;
+      overflow-y:scroll; 
+      min-width: 1000px; 
+    }
+  </style>
+
+<head>
+  <title>W4111 p1.3</title>
+  <h1>COMS W4111 Database project 1 part3</h1>
+  <p title="W4111 Database project 1 part3">
+      Name: Tianhua Fang-tf2377   
+      <hr>
+  </p>
+</head>
+
+<body>
+  <div> 
+  <form method="POST" action="/findpro" target="_blank">
+  <p>Find Products
+    <input type="submit" name="probtn" value="Show Products"></p>
+  </form>
+  
+   
+  <form method="POST" action="/findcoop" target="_blank">
+  <p>Find Products
+  <input type="submit" name="coopbtn" value="Show CoopCompany"></p> 
+  </form>
+
+  <form method="POST" action="/findst" target="_blank">
+  <p>Find Storage
+  <input type="submit" name="stbtn" value="Show Storage"></p> 
+  </form>
+
+  <form method="POST" action="/findcb" target="_blank">
+  <p>Find Storage
+  <input type="submit" name="cbbtn" value="Show Company Branches"></p> 
+  </form>
+
+  </div> 
+  <hr>
+  
+
+  <div>
+
+  <form method="POST" action="/addpro" target="_blank">
+  <p>Add Product:<br>
+  Name  :<input typr="text"   name="proname">
+  Price :<input typr="text"   name="proprice">
+  Amount :<input typr="text"   name="proamount">
+  <input type="submit" name="stbtn" value="Add product"></p> 
+  </form>
+
+  </div>  
+<hr>
+  <div> 
+  <form method="POST" action="/city" target="_blank">
+  Some Useful Query <br>
+  <p>
+  Item stored in the state
+  <select name="state">
+          <option value="NY">NY</option>
+          <option value="NJ">NJ</option>
+          <option value="AL">AL</option>
+          <option value="AK">AK</option>
+          <option value="CA">CA</option>
+          <option value="CO">CO</option>
+          <option value="IN">IN</option>
+          <option value="MT">MT</option>
+          <option value="NM">NM</option>
+          <option value="WY">WY</option>
+          <option value="VA">VA</option>
+  </select>
+  <input type="submit" name="citybtn" value="Show the item in City">
+  </p>
+  </form>
+ 
+  <br>
+  
+  <form method="POST" action="/copoffer" target="_blank">
+  <p>Find Storage
+  <input type="submit" name="cobtn" value="Show CoopCompany who provide most products"></p> 
+  </form>
+
+
+  <form method="POST" action="/shallowAmazon" target="_blank">
+  <p>A shallow Amazon Search Page(not fully function)
+    <input type="submit" name="sabtn" value="go"></p>
+  </form>
+  
+
+  </div> 
+
+
+
+</body>
+
+
+</html>
