@@ -14,8 +14,7 @@ I still cannot figure how to accept the request and redirect to the same page wi
 
 
 #Team contribution:
-Tianhua Fang: I did everything include mid layer design, back-end logic algorithm.
-
+Tianhua Fang: Both mid layer design, back-end logic algorithm.
 Edwin Chan: 
 
 
